@@ -277,37 +277,19 @@
         <!-- EYETECH Carousel -->
         <div class="container">
             <h3 class="project-subtitle">EYETECH</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=11; $i++): ?>
-                <div class="item">
-                    <img src="Developed web apps/EYETECH/<?= $i ?>.png" class="project-image" alt="EYETECH Project <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="eyetech-carousel"></div>
         </div>
 
         <!-- PCSTREE Carousel -->
         <div class="container mt-5">
             <h3 class="project-subtitle">PCSTREE</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=3; $i++): ?>
-                <div class="item">
-                    <img src="Developed web apps/PCSTREE/<?= $i ?>.jpg" class="project-image" alt="PCSTREE Project <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="pcstree-carousel"></div>
         </div>
 
         <!-- Student List App Carousel -->
         <div class="container mt-5">
             <h3 class="project-subtitle">Student List App</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=4; $i++): ?>
-                <div class="item">
-                    <img src="Developed web apps/Student List App/<?= $i ?>.JPG" class="project-image" alt="Student List Project <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="studentlist-carousel"></div>
         </div>
     </section>
 
@@ -318,37 +300,19 @@
         <!-- Flyers Carousel -->
         <div class="container">
             <h3 class="project-subtitle">Flyers</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=5; $i++): ?>
-                <div class="item">
-                    <img src="Flyers/<?= $i ?>.png" class="project-image" alt="Flyer Design <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="flyers-carousel"></div>
         </div>
 
         <!-- Infographics Carousel -->
         <div class="container mt-5">
             <h3 class="project-subtitle">Infographics</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=2; $i++): ?>
-                <div class="item">
-                    <img src="Infographics/<?= $i ?>.jpg" class="project-image" alt="Infographic <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="infographics-carousel"></div>
         </div>
 
         <!-- Invitations Carousel -->
         <div class="container mt-5">
             <h3 class="project-subtitle">Invitations</h3>
-            <div class="owl-carousel owl-theme">
-                <?php for($i=1; $i<=8; $i++): ?>
-                <div class="item">
-                    <img src="Invitations/<?= $i ?>.jpg" class="project-image" alt="Invitation Design <?= $i ?>">
-                </div>
-                <?php endfor; ?>
-            </div>
+            <div class="owl-carousel owl-theme" id="invitations-carousel"></div>
         </div>
 
         <!-- Other Designs Carousel -->
@@ -373,7 +337,10 @@
                 </div>
             </div>
         </div>
+
     </section>
+
+        
 
     <!-- Required Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -424,6 +391,101 @@
             }
         });
     });
+    </script>
+
+<script>
+    // Carousel configuration
+    const carousels = [
+        {
+            id: 'eyetech-carousel',
+            count: 11,
+            path: 'Developed web apps/EYETECH/',
+            ext: 'png'
+        },
+        {
+            id: 'pcstree-carousel',
+            count: 3,
+            path: 'Developed web apps/PCSTREE/',
+            ext: 'jpg'
+        },
+        {
+            id: 'studentlist-carousel',
+            count: 4,
+            path: 'Developed web apps/Student List App/',
+            ext: 'JPG'
+        },
+        {
+            id: 'flyers-carousel',
+            count: 5,
+            path: 'Flyers/',
+            ext: 'png'
+        },
+        {
+            id: 'infographics-carousel',
+            count: 2,
+            path: 'Infographics/',
+            ext: 'jpg'
+        },
+        {
+            id: 'invitations-carousel',
+            count: 8,
+            path: 'Invitations/',
+            ext: 'jpg'
+        }
+    ];
+
+    // Function to generate carousel items
+    function generateCarouselItems(config) {
+        const container = document.getElementById(config.id);
+        
+        for(let i = 1; i <= config.count; i++) {
+            const item = document.createElement('div');
+            item.className = 'item';
+            
+            const img = document.createElement('img');
+            img.className = 'project-image';
+            img.src = `${config.path}${i}.${config.ext}`;
+            img.alt = `${config.id.replace('-carousel', '')} Project ${i}`;
+            
+            item.appendChild(img);
+            container.appendChild(item);
+        }
+    }
+
+    // Initialize all carousels
+    carousels.forEach(config => {
+        generateCarouselItems(config);
+    });
+
+    // Add other designs and tarpaulin separately
+    const otherDesigns = [
+        { src: 'other/1.jpg', alt: 'Other Design 1' },
+        { src: 'other/2.png', alt: 'Other Design 2' }
+    ];
+
+    const otherContainer = document.createElement('div');
+    otherDesigns.forEach(design => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        
+        const img = document.createElement('img');
+        img.className = 'project-image';
+        img.src = design.src;
+        img.alt = design.alt;
+        
+        item.appendChild(img);
+        document.getElementById('other-carousel').appendChild(item);
+    });
+
+    // Add tarpaulin
+    const tarpaulinItem = document.createElement('div');
+    tarpaulinItem.className = 'item';
+    const tarpaulinImg = document.createElement('img');
+    tarpaulinImg.className = 'project-image';
+    tarpaulinImg.src = 'Tarpaulin/PISTA PATRON.png';
+    tarpaulinImg.alt = 'Pista Patron Tarpaulin';
+    tarpaulinItem.appendChild(tarpaulinImg);
+    document.getElementById('tarpaulin-carousel').appendChild(tarpaulinItem);
     </script>
 
     <script src="script.js"></script>
